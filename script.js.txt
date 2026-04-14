@@ -1,0 +1,20 @@
+async function solve() {
+  let question = document.getElementById("question").value;
+
+  document.getElementById("result").innerText = "Solving...";
+
+  try {
+    let res = await fetch("https://cuemath-project-iklw.onrender.com/solve", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question })
+    });
+
+    let data = await res.json();
+    document.getElementById("result").innerText = data.answer;
+  } catch (error) {
+    document.getElementById("result").innerText = "Server not connected";
+  }
+}
